@@ -1,7 +1,7 @@
 <script setup>
-  import ThemeSwitch from './components/ThemeSwitch.vue';
+  import Add from './components/Add.vue';
 </script>
 
 <template>
-  <ThemeSwitch/>
+  <Add/>
 </template>
