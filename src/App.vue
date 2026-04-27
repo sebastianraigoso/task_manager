@@ -1,5 +1,5 @@
 <script setup>
-  import AddButton from './components/AddButton.vue';
+  import AddTaskButton from './components/AddTaskButton.vue';
   import FormTask from './components/FormTask.vue';
   import TaskList from './components/TaskList.vue';
 
