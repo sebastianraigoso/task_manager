@@ -1,10 +1,11 @@
 <script setup>
-  import { ref, emit } from 'vue'
+  import { ref, defineEmits } from 'vue'
 
   const title = ref('')
   const description = ref('')
-  const date = ref('null')
-  const priority = ref('null')
+  const date = ref(null)
+  const priority = ref(null)
+  const emit = defineEmits(['add-task'])
 
   const submit = () => {
     emit('add-task', {
@@ -17,18 +18,16 @@
     // reset
     title.value = ''
     description.value = ''
+    date.value = null
+    priority.value = null
   }
 
-
-
-  const value = ref('')
   const options = [
     { label: 'Urgent', key: 'Urgent' },
     { label: 'High', key: 'high' },
     { label: 'Medium', key: 'Medium' },
     { label: 'Low', key: 'low' },
   ]
-
   
 </script>
 
@@ -44,8 +43,8 @@
 
       <div class="flex justify-end">
         <div class="flex gap-4 w-3xs justify-end">
-          <!-- newTask & Cancel Have to close the form -->
-          <n-button @click="$emit('newTask')" strong secondary type="primary">Add Task</n-button>
+          <!-- 'submit' & Cancel Have to close the form once finish -->
+          <n-button @click.prevent="submit" strong secondary type="primary">Add Task</n-button>
           <n-button strong secondary type="Error">Cancel</n-button>
         </div>
       </div>
