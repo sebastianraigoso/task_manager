@@ -5,6 +5,7 @@
   const description = ref('')
   const date = ref(null)
   const priority = ref(null)
+
   const emit = defineEmits(['add-task'])
 
   const submit = () => {
@@ -16,7 +17,10 @@
       priority: priority.value
     })
 
-    // reset
+    reset()
+  }
+
+  const reset = () => {
     title.value = ''
     description.value = ''
     date.value = null
@@ -35,21 +39,21 @@
 <template>
   <div class="flex justify-center items-center">
     <form class="flex flex-col gap-4 w-lg border-2 border-solid rounded-lg border-gray-300 p-4">
-      <n-input v-model:value="title" placeholder="Title" />
-      <n-input v-model:value="description" placeholder="Description" />
+      <n-input v-model:value="title" name="title" placeholder="Title" />
+      <n-input v-model:value="description" name="description" placeholder="Description" />
+      
       <div class="flex gap-4">
-        <n-date-picker v-model:value="date" type="date" placeholder="Date" class="flex-1" />
-        <n-tree-select v-model:value="priority" :options="options" placeholder="Priority" class="flex-1" />
+        <n-date-picker v-model:value="date" type="date" name="date" placeholder="Date" class="flex-1" />
+        <n-tree-select v-model:value="priority" :options="options" name="priority" placeholder="Priority" class="flex-1" />
       </div>
 
       <div class="flex justify-end">
         <div class="flex gap-4 w-3xs justify-end">
           <!-- 'submit' & Cancel Have to close the form once finish -->
           <n-button @click.prevent="submit" strong secondary type="primary">Add Task</n-button>
-          <n-button strong secondary type="Error">Cancel</n-button>
+          <n-button @click.prevent="reset" strong secondary type="error">Cancel</n-button>
         </div>
       </div>
-
     </form>
   </div>
 </template>
