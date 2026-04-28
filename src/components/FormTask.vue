@@ -9,6 +9,7 @@
 
   const submit = () => {
     emit('add-task', {
+      id: Date.now(),
       title: title.value,
       description: description.value,
       date: date.value,

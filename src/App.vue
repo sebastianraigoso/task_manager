@@ -11,10 +11,14 @@
     tasks.value.push(task)
   }
 
+  const handleDeleteTask = (id) => {
+    tasks.value = tasks.value.filter(task => task.id !== id)
+  }
+
 </script>
 
 <template>
-  <TaskList class="p-20" :tasks="tasks"/>
+  <TaskList class="p-20" :tasks="tasks" @delete-task="handleDeleteTask"/>
   <div class="flex justify-center">
     <div class="border-t border-gray-100 border w-120"></div>
   </div>
