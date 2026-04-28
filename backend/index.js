@@ -3,10 +3,18 @@ const app = express()
 
 app.use(express.json())
 
-app.get('/', (req, res) => {
-  res.send('API is running')
+let tasks = []
+
+app.get('/tasks', (req, res) => {
+  res.json(tasks)
+})
+
+app.post('/tasks', (req, res) => {
+  const task = req.body
+  tasks.push(task)
+  res.json(task)
 })
 
 app.listen(3000, () => {
-  console.log('Server running on http://locahost:3000')
+  console.log('Server running on http://localhost:3000')
 })

@@ -1,5 +1,5 @@
 <script setup>
-  import { ref, defineEmits } from 'vue'
+  import { ref } from 'vue'
 
   const title = ref('')
   const description = ref('')
@@ -41,7 +41,7 @@
     <form class="flex flex-col gap-4 w-lg border-2 border-solid rounded-lg border-gray-300 p-4">
       <n-input v-model:value="title" name="title" placeholder="Title" />
       <n-input v-model:value="description" name="description" placeholder="Description" />
-      
+
       <div class="flex gap-4">
         <n-date-picker v-model:value="date" type="date" name="date" placeholder="Date" class="flex-1" />
         <n-tree-select v-model:value="priority" :options="options" name="priority" placeholder="Priority" class="flex-1" />
