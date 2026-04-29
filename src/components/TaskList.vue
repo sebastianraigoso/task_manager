@@ -1,5 +1,4 @@
 <script setup>
-  import { defineEmits } from 'vue'
   import { DeleteForeverFilled } from '@vicons/material'
 
   defineProps({

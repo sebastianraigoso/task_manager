@@ -3,23 +3,37 @@
   import FormTask from './components/FormTask.vue';
   import TaskList from './components/TaskList.vue';
 
-  import { ref } from 'vue'
+  import { ref, onMounted } from 'vue'
+  
 
   const tasks = ref([])
 
-  const handleAddTask = (task) => {
-    tasks.value.push(task)
+  onMounted(async () => {
+    try {
+      const res = await fetch('http://localhost:3000/tasks')
+      tasks.value = await res.json()
+    } catch(err) {
+      console.error(err)
+    }
+  })
+
+  const handleAddTask = async (task) => {
+    const res = await fetch('http://localhost:3000/tasks', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(task)
+    })
+
+    const newTask = await res.json()
+    tasks.value.push(newTask)
   }
 
   const handleDeleteTask = (id) => {
     tasks.value = tasks.value.filter(task => task.id !== id)
   }
 
-  onMounted(async () => {
-    const res = await fetch('http://localhost:3000/tasks')
-    tasks.value = await res.json()
-  })
-  
 </script>
 
 <template>
