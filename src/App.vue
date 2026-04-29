@@ -4,7 +4,7 @@
   import TaskList from './components/TaskList.vue';
 
   import { ref, onMounted } from 'vue'
-  
+
 
   const tasks = ref([])
 
@@ -30,7 +30,11 @@
     tasks.value.push(newTask)
   }
 
-  const handleDeleteTask = (id) => {
+  const handleDeleteTask = async (id) => {
+    await fetch(`http://localhost:3000/tasks/${id}`, {
+      method: 'DELETE'
+    })
+    
     tasks.value = tasks.value.filter(task => task.id !== id)
   }
 

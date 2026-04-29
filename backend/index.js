@@ -21,6 +21,12 @@ app.post('/tasks', (req, res) => {
   res.json(task)
 })
 
+app.delete('/tasks/:id', (req, res) => {
+  const id = Number(req.params.id)
+  tasks = tasks.filter(task => task.id !== id)
+  res.json({ success: true})
+})
+
 app.listen(3000, () => {
   console.log('Server running on http://localhost:3000')
 })
