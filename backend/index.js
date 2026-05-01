@@ -4,8 +4,8 @@ const cors = require('cors')
 const app = express()
 const db = require('./db')
 
-app.use(express.json()) // parse Json from the frontend
-app.use(cors()) // lets Vue call express
+app.use(express.json())
+app.use(cors())
 
 app.get('/', (req, res) => {
   res.send('Backend is running!!!!')
@@ -23,12 +23,10 @@ app.get('/tasks', async (req, res) => {
 app.post('/tasks', async (req, res) => {
   try {
     const task = req.body
-
     await db.query(
       'INSERT INTO tasks (id, title, description, date, priority) VALUES (?, ?, ?, ?, ?)',
       [task.id, task.title, task.description, task.date, task.priority]
     )
-
     res.json(task)
   } catch (err) {
     res.status(500).json({ error: err.message })
@@ -38,9 +36,7 @@ app.post('/tasks', async (req, res) => {
 app.delete('/tasks/:id', async (req, res) => {
   try{
     const id = Number(req.params.id)
-
     await db.query('DELETE FROM tasks WHERE id = ?', [id])
-
     res.json({ success: true })
   } catch (err) {
     res.status(500).json({ error: err.message })
