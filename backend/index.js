@@ -1,32 +1,52 @@
 const express = require('express')
 const cors = require('cors')
+
 const app = express()
+const db = require('./db')
 
-app.use(express.json())
-app.use(cors())
-
-let tasks = []
+app.use(express.json()) // parse Json from the frontend
+app.use(cors()) // lets Vue call express
 
 app.get('/', (req, res) => {
   res.send('Backend is running!!!!')
 })
 
-app.get('/tasks', (req, res) => {
-  res.json(tasks)
+app.get('/tasks', async (req, res) => {
+  try {
+    const [rows] = await db.query('SELECT * FROM tasks')
+    res.json(rows)
+  } catch (err) {
+    res.status(500).json({ error: err.message })
+  }
 })
 
-app.post('/tasks', (req, res) => {
-  const task = req.body
-  tasks.push(task)
-  res.json(task)
+app.post('/tasks', async (req, res) => {
+  try {
+    const task = req.body
+
+    await db.query(
+      'INSERT INTO tasks (id, title, description, date, priority) VALUES (?, ?, ?, ?, ?)',
+      [task.id, task.title, task.description, task.date, task.priority]
+    )
+
+    res.json(task)
+  } catch (err) {
+    res.status(500).json({ error: err.message })
+  }
 })
 
-app.delete('/tasks/:id', (req, res) => {
-  const id = Number(req.params.id)
-  tasks = tasks.filter(task => task.id !== id)
-  res.json({ success: true})
+app.delete('/tasks/:id', async (req, res) => {
+  try{
+    const id = Number(req.params.id)
+
+    await db.query('DELETE FROM tasks WHERE id = ?', [id])
+
+    res.json({ success: true })
+  } catch (err) {
+    res.status(500).json({ error: err.message })
+  }
 })
 
-app.listen(3000, () => {
-  console.log('Server running on http://localhost:3000')
+app.listen(process.env.PORT, () => {
+  console.log(`Server running on http://localhost:${process.env.PORT}`)
 })
