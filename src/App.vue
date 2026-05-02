@@ -37,7 +37,6 @@
     
     tasks.value = tasks.value.filter(task => task.id !== id)
   }
-
 </script>
 
 <template>
