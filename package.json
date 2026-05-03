@@ -14,7 +14,8 @@
     "naive-ui": "^2.44.1",
     "tailwindcss": "^4.2.4",
     "vfonts": "^0.0.3",
-    "vue": "^3.5.32"
+    "vue": "^3.5.32",
+    "vue-router": "^5.0.6"
   },
   "devDependencies": {
     "@vicons/material": "^0.13.0",
