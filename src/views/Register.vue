@@ -29,7 +29,7 @@
       return
     }
 
-    if (data.success) {
+    if(data.success) {
       router.push('/tasks')
     }
   }

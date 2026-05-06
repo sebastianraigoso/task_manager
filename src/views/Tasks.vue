@@ -10,7 +10,7 @@
 
   onMounted(async () => {
     try {
-      const res = await fetch('http://localhost:3000/tasks')
+      const res = await fetch('http://localhost:3000/api/tasks')
       tasks.value = await res.json()
     } catch(err) {
       console.error(err)
@@ -18,7 +18,7 @@
   })
 
   const handleAddTask = async (task) => {
-    const res = await fetch('http://localhost:3000/tasks', {
+    const res = await fetch('http://localhost:3000/api/tasks', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -31,7 +31,7 @@
   }
 
   const handleDeleteTask = async (id) => {
-    await fetch(`http://localhost:3000/tasks/${id}`, {
+    await fetch(`http://localhost:3000/api/tasks/${id}`, {
       method: 'DELETE'
     })
     
