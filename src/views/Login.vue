@@ -10,13 +10,13 @@
       password : password.value
     })
   }
-  
+
 </script>
 
 <template>
   <div class="flex flex-col justify-center items-center h-screen">
 
-    <n-form @submit.prevent="login" class="flex flex-col gap-4 w-lg border-2 border-solid rounded-lg border-gray-300 p-4">
+    <n-form @submit.prevent="login" class="flex flex-col gap-4 w-lg border-2 border-solid rounded-lg border-gray-300 p-10">
       <h1 class="p-10 text-2xl text-center font-medium">LOGIN</h1>
       <n-input name="email" placeholder="Email" />
       <n-input name="password" placeholder="Password" />

@@ -21,21 +21,23 @@
         password: password.value
       })
     })
-  
+
     const data = await response.json()
-  
+
+    if(!response.ok) {
+      alert(data.error)
+      return
+    }
+
     if (data.success) {
       router.push('/tasks')
     }
   }
-
-  
-
 </script>
 
 <template>
   <div class="flex flex-col justify-center items-center h-screen">
-    <n-form @submit.prevent="register" class="flex flex-col gap-4 w-lg border-2 border-solid rounded-lg border-gray-300 p-4">
+    <n-form @submit.prevent="register" class="flex flex-col gap-4 w-lg border-2 border-solid rounded-lg border-gray-300 p-10">
 
       <h1 class="p-10 text-2xl text-center font-medium">REGISTER</h1>
       <n-input v-model:value="username" type="text" name="username" placeholder="Username" />

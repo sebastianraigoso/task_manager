@@ -14,7 +14,6 @@ app.get('/', (req, res) => {
 
 
 app.post('/api/register', async (req, res) => {
-  console.log('register route hit')
   try {
     const { username, email, password } = req.body
 
@@ -25,6 +24,9 @@ app.post('/api/register', async (req, res) => {
         error: 'Email already exists'
       })
     }
+
+    await db.query('INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)', 
+      [username, email, password])
 
     res.json({ success: true })
 
