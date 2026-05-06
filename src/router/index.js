@@ -4,8 +4,6 @@ import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Tasks from '../views/Tasks.vue'
 
-
-
 const routes = [
   { path: '/', component: Login },
   { path: '/register', component: Register },
