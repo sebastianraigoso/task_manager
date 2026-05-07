@@ -4,12 +4,31 @@
   const email = ref('')
   const password = ref('')
 
-  const login = () => {
-    fetch()
+  const login = async () => {
+    const response = await fetch('http://localhost:3000/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: email.value,
+        password: password.value
+      })
+    })
+
+    const data = await response.json()
+    
+    if(!response.ok) {
+      alert(data.error)
+      return
+    }
+
+    if(data.success) {
+      router.push('/tasks')
+    }
   }
 
-  // check if user have an account
-
+  
 </script>
 
 <template>
@@ -24,7 +43,7 @@
         <n-button attr-type="login" type="primary">
           <RouterLink to="/tasks">Login</RouterLink>
         </n-button>
-        
+
         <div class="flex justify-center items-center gap-4">
          <p >Don't have an account ?</p>
           <!-- click event sent request backend to switch page -->
